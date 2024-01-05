@@ -49,6 +49,8 @@ public class ProductoControlador {
     @PutMapping("/productos/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable int id, @RequestBody Producto productoRecibido) {
         Producto producto = this.productoServicio.buscarProductoPorId(id);
+        if (producto == null)
+            throw new RecursoNoEncontradoExcepcion("No se encontró el id: " + id);
         producto.setDescripcion(productoRecibido.getDescripcion());
         producto.setPrecio(productoRecibido.getPrecio());
         producto.setExistencia(productoRecibido.getExistencia());
@@ -59,6 +61,8 @@ public class ProductoControlador {
     @DeleteMapping("/productos/{id}")
     public ResponseEntity<Map<String, Boolean>> eliminarProducto(@PathVariable int id) {
         Producto producto = this.productoServicio.buscarProductoPorId(id);
+        if (producto == null)
+            throw new RecursoNoEncontradoExcepcion("No se encontró el id: " + id);
         this.productoServicio.eliminarProductoPorId(producto.getIdProducto());
         Map<String, Boolean> respuesta = new HashMap<>();
         respuesta.put("eliminado", Boolean.TRUE);
