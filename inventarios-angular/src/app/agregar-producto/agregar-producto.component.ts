@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-agregar-producto',
   templateUrl: './agregar-producto.component.html',
-  styleUrl: './agregar-producto.component.css',
 })
 export class AgregarProductoComponent {
   producto: Producto = new Producto();
