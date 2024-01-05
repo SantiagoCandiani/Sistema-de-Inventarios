@@ -3,10 +3,7 @@ package scandiani.inventarios.controladores;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import scandiani.inventarios.modelos.Producto;
 import scandiani.inventarios.servicios.IProductoServicio;
 
@@ -28,6 +25,12 @@ public class ProductoControlador {
         logguer.info("Productos Obtenidos:");
         productos.forEach(producto -> logguer.info(producto.toString()));
         return productos;
+    }
+
+    @PostMapping("/productos")
+    public Producto agregarProducto(@RequestBody Producto producto){
+        logguer.info("Producto a Agregar: " + producto);
+        return this.productoServicio.guardadProducto(producto);
     }
 
 
